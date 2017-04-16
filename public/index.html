@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSGO Xtreme Double Case Jam Open</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+
+      <div id="name"></div>
+
+      <button onclick="openCase()">Open Case</button>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    document.addEventListener('load', init());
+
+    var name;
+
+    function init() {
+      name = prompt('What is your name?');
+      document.getElementById('name').textContent = name;
+      socket.emit('join', name);
+      window.setInterval(function() {socket.emit('heartBeat')}, 10000);
+    }
+
+    function openCase() {
+      socket.emit('openCase');
+    }
+    socket.on('caseResult', function(rarity) {
+      alert('You unboxed a ' + rarity + ' skin!');
+    });
+
+  </script>
+</html>
