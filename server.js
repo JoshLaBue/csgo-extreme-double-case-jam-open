@@ -7,7 +7,7 @@ const io = require('socket.io')(http);
 const port = 3000;
 
 var players = [];
-//app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.use('/players', (req, res) => {
   res.send(players);
@@ -39,18 +39,18 @@ io.on('connection', (socket) => {
         players.splice(i, 1);
       }
     }
-    io.emit('playerUpdate', players);
+    //io.emit('playerUpdate', players);
   });
 
   socket.on('openCase', () => {
     var rarity = 'mil spec';
     var open = Math.random() * (100-1) + 1;
     console.log(open);
-    if(open<=78) rarity = 'milSpec';
-    if(open > 78 && open <=95) rarity = 'restricted';
-    if(open > 95 && open <= 97) rarity = 'classified';
-    if(open>97 && open<=99) rarity = 'covert';
-    if(open >99 && open <=100) rarity = 'knife';
+    if(open<=50) rarity = 'milSpec';
+    if(open > 50 && open <=75) rarity = 'restricted';
+    if(open > 75 && open <= 90) rarity = 'classified';
+    if(open>90 && open<=96) rarity = 'covert';
+    if(open >96 && open <=100) rarity = 'knife';
     io.emit('caseResult', rarity);
   });
 

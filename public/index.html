@@ -3,12 +3,16 @@
   <head>
     <title>CSGO Xtreme Double Case Jam Open</title>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Palanquin+Dark" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
 
       <div id="name"></div>
 
       <button onclick="openCase()">Open Case</button>
+
+      <ul id="items"></ul>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -19,17 +23,35 @@
     var name;
 
     function init() {
-      name = prompt('What is your name?');
-      document.getElementById('name').textContent = name;
-      socket.emit('join', name);
-      window.setInterval(function() {socket.emit('heartBeat')}, 10000);
+        if(window.location.pathname == '/dev') name = 'Dev';
+        else name = prompt('What is your name?');
+        document.getElementById('name').textContent = name;
+        socket.emit('join', name);
+        window.setInterval(function() {socket.emit('heartBeat')}, 10000);
     }
 
     function openCase() {
       socket.emit('openCase');
     }
     socket.on('caseResult', function(rarity) {
-      alert('You unboxed a ' + rarity + ' skin!');
+      //alert('You unboxed a ' + rarity + ' skin!');
+      var items = document.getElementById('items');
+      var item = document.createElement('li');
+
+      var rarityName;
+      if(rarity == 'milSpec') { rarityName = 'Mil Spec'; color = '1608D2'; }
+      if(rarity == 'restricted') { rarityName = 'Restricted'; color = '5E06B5'; }
+      if(rarity == 'classified') { rarityName = 'Classified'; color = 'FF28FB'; }
+      if(rarity == 'covert') { rarityName = 'Covert'; color = 'AA0606'; }
+      if(rarity == 'knife') { rarityName = 'Knife'; color = 'C9B607'}
+      item.appendChild(document.createTextNode(rarityName));
+      item.style.color = '#' + color;
+      //items.appendChild(item);
+      items.insertBefore(item, items.childNodes[0])
+      if(items.childElementCount > 25) {
+        var elements = items.getElementsByTagName('li');
+        items.removeChild(elements[25]);
+      }
     });
 
   </script>

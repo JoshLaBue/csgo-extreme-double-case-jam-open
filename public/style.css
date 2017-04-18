@@ -1,0 +1,15 @@
+body {
+  margin:0px;
+  padding:5px;
+  background-color: rgb(150,150,150);
+}
+
+#items {
+  background-color: #EEEEEE;
+  line-height: 1em;
+  list-style:none;
+  padding: 0;
+  list-style-type: none;
+  font-family: 'Palanquin Dark', sans-serif;
+  font-size:25px;
+}
