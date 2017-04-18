@@ -1,6 +1,17 @@
 # csgo-extreme-double-case-jam-open
 Parody CSGO gambling site game. Server backend written in NodeJS.
-
+## To-do list:
+  #### Real skin names/values
+  This can be done in two different ways.
+  1. Storing all items with pre-set values in a JSON file, maybe with a seperate program/script to make that
+  2. Loading Steam market prices in realtime/when server starts
+  
+  #### Storing a cookie with a display-name in it
+  With this, no extra data is stored on the server, but is only available on that given browser.
+  
+  #### Storing inventories, in-game wallet amounts, and 'profiles' in a database
+  This will most likely take the longest to be completed, but is one of the end-goals of this project.
+  
 ## Likely to be asked questions:
   #### Why?
   Why not? (Translation: I'm learning Node and playing with express, and doing a little HTML/CSS here and there for fun, and to better my coding ability)
